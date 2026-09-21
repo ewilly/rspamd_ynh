@@ -15,15 +15,20 @@ ynh_config_add --template="rspamd_redis.conf" --destination="/etc/rspamd/local.d
 
 ## Add per-user conf
 ynh_config_add --template="rspamd_classifier-bayes.conf" --destination="/etc/rspamd/local.d/classifier-bayes.conf"
-ynh_systemctl --service=rspamd --action="restart"
 
 ## Set web interface password
 HASH=$(rspamadm pw -p $password)
 echo "password = \"$HASH\"" > "/etc/rspamd/local.d/worker-controller.inc"
 echo "Please note the password for the web interface: $password"
 
+## Set permissions
+chmod 644 /etc/rspamd/local.d/redis.conf /etc/rspamd/local.d/classifier-bayes.conf /etc/rspamd/local.d/worker-controller.inc
+
 ## Integrate rspamd in YunoHost service list
 yunohost service add "$app" --description="Spam filtering system"
+
+## Restart rspamd to load the new conf
+ynh_systemctl --service=rspamd --action="restart"
 
 # Add postfix configuration hook and regen postfix conf
 ynh_config_add --template="yunohost_postfix_regenconf_hook" --destination="/usr/share/yunohost/hooks/conf_regen/99-postfix_rspamd"
