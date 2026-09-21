@@ -9,18 +9,21 @@ ynh_script_progression "Restoring system configurations related to $app..."
 
 ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 
+ynh_restore "/etc/rspamd/local.d/redis.conf"
+ynh_restore "/etc/rspamd/local.d/classifier-bayes.conf"
+ynh_restore "/etc/rspamd/local.d/worker-controller.inc"
+
 ynh_restore "/usr/share/yunohost/hooks/conf_regen/99-postfix_rspamd"
 yunohost tools regen-conf postfix
 ynh_systemctl --service=postfix --action="restart"
 
-ynh_restore "/etc/rspamd/local.d/redis.conf"
+
 ynh_restore "/etc/dovecot/yunohost.d/post-ext.d/antispam.conf"
 ynh_restore "/etc/dovecot/sieve"
 
-chown -R vmail:mail "/etc/dovecot/sieve"
-chmod -R u=rw,go= "/etc/dovecot/sieve"
-chmod u+x "/etc/dovecot/sieve/rspamd-learn-spam.sh"
-chmod u+x "/etc/dovecot/sieve/rspamd-learn-ham.sh"
+chmod 755 "/etc/dovecot/sieve"
+chmod 644 /etc/dovecot/sieve/report-*.sieve /etc/dovecot/sieve/report-*.svbin
+chmod 755 /usr/lib/dovecot/sieve-pipe/rspamd-learn-*.sh
 
 ynh_systemctl --service=dovecot --action="restart"
 
