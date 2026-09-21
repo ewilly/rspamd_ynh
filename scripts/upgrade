@@ -28,7 +28,7 @@ ynh_config_add --template="rspamd_redis.conf" --destination="/etc/rspamd/local.d
 ynh_config_add --template="rspamd_classifier-bayes.conf" --destination="/etc/rspamd/local.d/classifier-bayes.conf"
 
 ## Set permissions
-chmod 644 /etc/rspamd/local.d/redis.conf /etc/rspamd/local.d/classifier-bayes.conf /etc/rspamd/local.d/worker-controller.inc
+chmod 644 /etc/rspamd/local.d/*
 
 ## Restart rspamd to load the new conf
 ynh_systemctl --service=rspamd --action="restart"
@@ -62,13 +62,13 @@ ynh_config_add --template="dovecot_report-ham.sieve" --destination="/etc/dovecot
 ynh_config_add --template="dovecot_rspamd-learn-ham.sh" --destination="/usr/lib/dovecot/sieve-pipe/rspamd-learn-ham.sh"
 
 ## Compile sieve scripts
-sievec "/etc/dovecot/sieve/spam-to-junk-folder.sieve"
-sievec "/etc/dovecot/sieve/report-spam.sieve"
-sievec "/etc/dovecot/sieve/report-ham.sieve"
+sievec /etc/dovecot/sieve/spam-to-junk-folder.sieve
+sievec /etc/dovecot/sieve/report-spam.sieve
+sievec /etc/dovecot/sieve/report-ham.sieve
 
 ## Set permissions
-chmod 755 "/etc/dovecot/sieve"
-chmod 644 /etc/dovecot/sieve/report-*.sieve /etc/dovecot/sieve/report-*.svbin
+chmod 755 /etc/dovecot/sieve
+chmod 644 /etc/dovecot/sieve/report-*.{sieve,svbin}
 chmod 755 /usr/lib/dovecot/sieve-pipe/rspamd-learn-*.sh
 
 ## Restart dovecot to load the new sieve scripts
