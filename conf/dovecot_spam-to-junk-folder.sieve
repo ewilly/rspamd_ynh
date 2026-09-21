@@ -1,4 +1,4 @@
-require ["fileinto", "mailbox"];
+require ["fileinto"];
 
 ##
 ## Global spam filter
@@ -7,6 +7,5 @@ require ["fileinto", "mailbox"];
 
 # Check for Rspamd spam header
 if header :is "X-Spam" "Yes" {
-    # Create Junk folder if it doesn't exist and file message there
-    fileinto :create "Junk";
+    fileinto "Junk";
 }
