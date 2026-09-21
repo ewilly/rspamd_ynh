@@ -26,8 +26,9 @@ ynh_config_add --template="rspamd_redis.conf" --destination="/etc/rspamd/local.d
 
 ## Add per-user conf
 ynh_config_add --template="rspamd_classifier-bayes.conf" --destination="/etc/rspamd/local.d/classifier-bayes.conf"
-ynh_systemctl --service=rspamd --action="restart"
-ynh_systemctl --service=rspamd --action="restart"
+
+## Set permissions
+chmod 644 /etc/rspamd/local.d/redis.conf /etc/rspamd/local.d/classifier-bayes.conf /etc/rspamd/local.d/worker-controller.inc
 
 ## Restart rspamd to load the new conf
 ynh_systemctl --service=rspamd --action="restart"
