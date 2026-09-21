@@ -1,0 +1,9 @@
+version = "1.0"
+
+[main]
+name.en = "Rspamd configuration"
+
+    [main.password]
+    ask.en = "Set a password for the Rspamd web interface access"
+    type = "password"
+    help.en = "If a password already exist, leave blank and it will not be replaced."
