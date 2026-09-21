@@ -38,6 +38,10 @@ ram.runtime = "50M"
     type = "path"
     default = "/rspamd"
 
+    [install.password]
+    type = "password"
+    help.en = "This corresponds to the password for Rspamd web interface access."
+
     [install.init_main_permission]
     type = "group"
     default = "visitors"
