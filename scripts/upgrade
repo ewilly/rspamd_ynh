@@ -68,7 +68,7 @@ sievec /etc/dovecot/sieve/report-ham.sieve
 
 ## Set permissions
 chmod 755 /etc/dovecot/sieve
-chmod 644 /etc/dovecot/sieve/report-*.{sieve,svbin}
+chmod 644 /etc/dovecot/sieve/*.{sieve,svbin}
 chmod 755 /usr/lib/dovecot/sieve-pipe/rspamd-learn-*.sh
 
 ## Restart dovecot to load the new sieve scripts

@@ -22,7 +22,7 @@ ynh_systemctl --service=postfix --action="restart"
 ynh_restore "/etc/dovecot/yunohost.d/post-ext.d/antispam.conf"
 ynh_restore "/etc/dovecot/sieve"
 chmod 755 /etc/dovecot/sieve
-chmod 644 /etc/dovecot/sieve/report-*.{sieve,svbin}
+chmod 644 /etc/dovecot/sieve/*.{sieve,svbin}
 chmod 755 /usr/lib/dovecot/sieve-pipe/rspamd-learn-*.sh
 ynh_systemctl --service=dovecot --action="restart"
 
