@@ -109,8 +109,6 @@ fi
 
 yunohost service add "$app" --description="Spam filtering system"
 
-ynh_config_add_logrotate
-
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
